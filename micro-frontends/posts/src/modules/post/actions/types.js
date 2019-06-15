@@ -1,0 +1,1 @@
+export const SET_LOADED_POSTS = 'SET_LOADED_POSTS'
