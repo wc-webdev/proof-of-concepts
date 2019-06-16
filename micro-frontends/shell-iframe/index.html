@@ -47,45 +47,23 @@
   <div
     class="viewport-wrapper"
   >
-    <div
+    <iframe
       class="viewport"
       id="laneTodo"
+      src="http://localhost:3000"
     >
 
-    </div>
+    </iframe>
   </div>
   <div class="viewport-wrapper">
-    <div
+    <iframe
       class="viewport"
       id="laneInProgress"
+      src="http://localhost:8080"
     >
 
-    </div>
+    </iframe>
   </div>
 </div>
-<script>
-  function AppShell() {
-    this.start = () => {
-      const queue = [
-        'http://localhost:5001/static/js/bundle.js',
-        'http://localhost:5000/app.js',
-      ]
-
-      queue.forEach(i => {
-        //const res = await window.fetch(i)
-        //const content = await res.text()
-
-        const scriptTag = window.document.createElement('script')
-        scriptTag.src = i
-        //scriptTag.innerText = content
-        window.document.body.appendChild(scriptTag)
-      })
-    }
-  }
-
-  window.AppShell = new AppShell()
-
-  window.AppShell.start()
-</script>
 </body>
 </html>

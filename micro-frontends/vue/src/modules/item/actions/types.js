@@ -1,0 +1,1 @@
+export const SET_LOADED_ITEMS = 'SET_LOADED_ITEMS'
