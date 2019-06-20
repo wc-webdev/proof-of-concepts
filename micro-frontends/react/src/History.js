@@ -8,5 +8,5 @@ export default function History(environment) {
     case 'server':
       return HistoryFactory.createMemoryHistory()
   }
-  return HistoryFactory.createBrowserHistory()
+  return HistoryFactory.createMemoryHistory()
 }

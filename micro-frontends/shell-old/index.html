@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>
+    App Shell
+  </title>
+  <link rel="stylesheet" type="text/css" href="css/layout.css">
+</head>
+<body>
+<div id="root">
+  <div id="todo"></div>
+  <div id="inProgress"></div>
+</div>
+<script src="../interop/dist/bundle.js"></script>
+<script src="../shell/public/javascripts/Renderer.js"></script>
+<script>
+  ((window) => {
+    const appShellParent = new window.AppShell.Parent()
+    const appShell = new window.Renderer(appShellParent)
+
+    appShellParent.subscriber.subscribe(e => {
+      const {
+        type,
+        location,
+        action,
+      } = e.data
+      switch (action) {
+        case 'REPLACE':
+          window.history.replaceState(location, null, location.pathname)
+          break
+        case 'PUSH':
+          window.history.pushState(location, null, location.pathname)
+          break
+        default:
+          break
+      }
+
+      appShellParent.broadcast({
+        type,
+      })
+    })
+
+    appShell.mount()
+  })(window)
+</script>
+</body>
+</html>

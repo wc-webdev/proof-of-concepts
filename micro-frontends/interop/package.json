@@ -1,0 +1,13 @@
+{
+  "name": "@wc-pocs/micro-frontend-interop",
+  "version": "0.0.0",
+  "description": "Communication across modules in a micro-frontend setup",
+  "main": "dist/bundle.js",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.34.0"
+  },
+  "scripts": {
+    "build": "node ./scripts/build.js"
+  }
+}

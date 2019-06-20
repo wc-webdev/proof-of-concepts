@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Provider as StyletronProvider, } from 'styletron-react'
 import { connectRouter, routerMiddleware, } from 'connected-react-router'
 import { Provider, } from 'react-redux'
+import { Child as AppShellInterop, } from '@wc-pocs/micro-frontend-interop'
 
 import App from './components/App/App'
 import * as serviceWorker from './serviceWorker'
@@ -15,7 +16,21 @@ const generateView = async args => {
     state = {},
     environment,
   } = args
+
+  const appShell = new AppShellInterop({
+    targetOrigin: '*',
+  })
+  appShell.subscriber.subscribe(e => {
+    console.log('React Child', e)
+  })
   const history = new History(environment)
+  history.listen((location, action) => {
+    appShell.emit({
+      type: 'navigate',
+      location,
+      action,
+    })
+  })
   const store = new Store(
     {
       ...reducers,
@@ -36,7 +51,7 @@ const generateView = async args => {
   )
 }
 
-export const renderWebView = async args => {
+const renderWebView = async args => {
   const {
     root = 'root',
     ...etcArgs
@@ -56,13 +71,9 @@ export const renderWebView = async args => {
   )
 }
 
-export const start = (args = {}) => {
-  if (typeof window !== 'object') {
-    // server
-    return
-  }
-  // browser-like
-  if (typeof window.AppShell !== 'object') {
+const start = (args = {}) => {
+  if (typeof window === 'object') {
+    // browser-like
     renderWebView(args)
       .then(() => {
         // If you want your app to work offline and load faster, you can change
@@ -70,7 +81,9 @@ export const start = (args = {}) => {
         // Learn more about service workers: https://bit.ly/CRA-PWA
         serviceWorker.unregister()
       })
+    return
   }
+  // server/some other environment
 }
 
 start({
