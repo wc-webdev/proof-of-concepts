@@ -1,1 +1,0 @@
-export const SET_LOADED_ITEMS = 'ITEM/SET_LOADED_ITEMS'

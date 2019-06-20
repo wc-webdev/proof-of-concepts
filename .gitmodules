@@ -1,0 +1,6 @@
+[submodule "micro-frontends/modules/react"]
+	path = micro-frontends/modules/react
+	url = https://github.com/wc-webdev/react-kanban-lane.git
+[submodule "micro-frontends/modules/vue"]
+	path = micro-frontends/modules/vue
+	url = https://github.com/wc-webdev/vue-kanban-lane.git
